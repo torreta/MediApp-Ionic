@@ -1,7 +1,7 @@
 {
-  "name": "mediapp-ionic",
+  "name": "testo",
   "version": "1.0.0",
-  "description": "MediApp-Ionic: An Ionic project",
+  "description": "testo: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
