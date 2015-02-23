@@ -1,32 +1,12 @@
 <ion-view view-title="Medications">
 
   <ion-content>
-  hola
+  <a ng-init="getMedications()"></a> 
     <ion-list>
-    hola2
       <ion-item ng-repeat="medication in medications" >
-      hola
             <h2>{{medication.name}}</h2>
             <h2>{{medication.description}}</h2>
       </ion-item>
     </ion-list>
-    hola3
-		<table class="table table-hover">
-				<thead>
-					<tr>
-						as
-						<th>Name</th>
-						<th>description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- listing resourses one by one -->
-					<tr ng-repeat="medication in medications">
-						<td>{{medication.name}}</td>
-						<td>{{medication.description}}</td>
-											
-					</tr>
-				</tbody>
-			</table>
   </ion-content>
 </ion-view>
