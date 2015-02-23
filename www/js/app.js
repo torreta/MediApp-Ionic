@@ -85,7 +85,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-
+  .state('tab.medications', {
+      url: '/medications',
+      views: {
+        'tab-medications': {
+          templateUrl: 'templates/medications.html',
+          controller: 'MedicationCtrl'
+        }
+      }
+    })
   .state('tab.account', {
     url: '/account',
     views: {
