@@ -1,4 +1,4 @@
-angular.module('mediapp', ['ionic','medications','sessions','users'])
+angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users'])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -38,7 +38,8 @@ angular.module('mediapp', ['ionic','medications','sessions','users'])
 
       .state('userEdit', {
         url: "/profile",
-        templateUrl: "templates/user/edit.html"
+        templateUrl: "templates/user/edit.html",
+        controller: 'userController'
       })
 
       .state('home', {

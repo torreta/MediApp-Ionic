@@ -1,12 +1,12 @@
-angular.module('sessions',[])
+angular.module('sessions',['ngStorage'])
 
-.controller('sessionController', function($scope,$http,$location){
+.controller('sessionController', function($scope,$http,$location,$localStorage){
 
   var BASE_URL = "http://torreta-163528.sae1.nitrousbox.com/api/v1";
 
  $scope.login = function(user){
  	$scope.user = [];
- 	// $scope.auth = this.auth;
+ 	$localStorage.token = [];
 
     $http({
       method: 'POST',
@@ -21,8 +21,10 @@ angular.module('sessions',[])
       console.log( data );
       $scope.user.token = data.token;
       $scope.user.email = data.user.email;
-      //console.log( "inside scope, email: "+$scope.user.email+ ", token: "+ $scope.user.token  );
-      $location.path('/medications'); 
+      console.log( "inside scope, email: "+$scope.user.email+ ", token: "+ $scope.user.token  );
+      $localStorage.token = data.token;
+      console.log( "token en localStorage es: " + $localStorage.token );
+      $location.path('/'); 
       //deberiamos enviar el mensaje de CREADO!
     })
     .error(function(data,status,headers,config){
