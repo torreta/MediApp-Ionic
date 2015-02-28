@@ -1,6 +1,6 @@
 angular.module('medications',[])
 
-.controller('medicationController', function($scope,$http){
+.controller('medicationController', function($scope,$http,$location){
 
     var BASE_URL = "http://torreta-163528.sae1.nitrousbox.com/api/v1";
 
@@ -24,31 +24,29 @@ angular.module('medications',[])
 
   }; //get medications
 
-  // $scope.addMedication = function(medication){
-  //   $http({
-  //     method: 'POST',
-  //     url: BASE_URL + '/medications',
-  //     params:{
-  //       'name': $scope.medication.name,
-  //       'phone': $scope.medication.phone,
-  //       'address': $scope.medication.address
-  //     }
-  //   })
-  //   .success(function(data,status,headers,config){
-  //     console.log( "Medication created" );
-  //     console.log( data );
-  //     mediapp.medications =  mediapp.medications + data;
-  //     $scope.medication = [];
-  //     $location.path('/medications'); 
-  //     //deberiamos enviar el mensaje de CREADO!
-  //   })
-  //   .error(function(data,status,headers,config){
-  //     console.log( "error creating Medication" );
-  //     // If user doesnt have a token, create one and signin
-  //     //$scope.loginPOST();
-  //   });
+  $scope.addMedication = function(medication){
+    $http({
+      method: 'POST',
+      url: BASE_URL + '/medications',
+      params:{
+        'name': medication.name,
+        'description': medication.description
+      }
+    })
+    .success(function(data,status,headers,config){
+      console.log( "Medication created" );
+      console.log( data );
+      medication = [];
+      $location.path('/medications'); 
+      //deberiamos enviar el mensaje de CREADO!
+    })
+    .error(function(data,status,headers,config){
+      console.log( "error creating Medication" );
+      // If user doesnt have a token, create one and signin
+      //$scope.loginPOST();
+    });
 
-  // }; //add medications
+  }; //add medications
 
   // $scope.setMedication = function(id){
 

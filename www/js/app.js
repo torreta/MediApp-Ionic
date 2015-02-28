@@ -51,7 +51,8 @@ angular.module('mediapp', ['ionic','medications'])
 
       .state('newMedication', {
         url: "/medications/new",
-        templateUrl: "templates/medication/new.html"
+        templateUrl: "templates/medication/new.html",
+        controller: 'medicationController'
       })
 
       .state('medications', {
