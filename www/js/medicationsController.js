@@ -6,7 +6,7 @@ angular.module('medications',[])
 
   //Consultos la agencias que se encuentran en el API
   $scope.getMedications = function(){
-    console.log( "busco medicamentos" );
+    console.log( "Searching Medications" );
     $scope.medications = [];
 
     $http({
