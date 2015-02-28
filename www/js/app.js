@@ -1,4 +1,4 @@
-angular.module('mediapp', ['ionic','medications','sessions'])
+angular.module('mediapp', ['ionic','medications','sessions','users'])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -27,7 +27,8 @@ angular.module('mediapp', ['ionic','medications','sessions'])
 
       .state('signup', {
         url: "/signup",
-        templateUrl: "templates/user/new.html"
+        templateUrl: "templates/user/new.html",
+        controller: 'userController'
       })
 
       .state('recover', {

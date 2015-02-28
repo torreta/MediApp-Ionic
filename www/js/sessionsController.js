@@ -31,18 +31,7 @@ angular.module('sessions',[])
       //$scope.loginPOST();
     });
 
-  }; //add medications
-
-
-
-
-
-
-
-
-
-
-
+  }; //create session
 
 
 
