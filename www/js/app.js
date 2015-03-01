@@ -1,4 +1,4 @@
-angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users'])
+angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users','treatments'])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -44,7 +44,8 @@ angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users']
 
       .state('home', {
         url: "/",
-        templateUrl: "templates/treatment/index.html"
+        templateUrl: "templates/treatment/index.html",
+        controller: 'treatmentController'
       })
 
       .state('newTreatment', {
