@@ -50,7 +50,8 @@ angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users',
 
       .state('newTreatment', {
         url: "/treatment/new",
-        templateUrl: "templates/treatment/new.html"
+        templateUrl: "templates/treatment/new.html",
+        controller: 'treatmentController'
       })
 
       .state('newMedication', {

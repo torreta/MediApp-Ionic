@@ -7227,3 +7227,7 @@ a.ui-input-clear {
   text-decoration: none; }
   #med-list .icon-checkmark:hover {
     color: #17D6B6; }
+
+select {
+  background-color: #fff;
+  border: 1px solid #DADCDF !important; }
