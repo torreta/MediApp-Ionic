@@ -1,8 +1,8 @@
 angular.module('treatments',['ngStorage'])
 
-.controller('treatmentController', function($scope,$http,$location,$localStorage){
+.controller('treatmentController', function($scope,$http,$location,$localStorage, Api){
 
-	var BASE_URL = "http://torreta-163528.sae1.nitrousbox.com/api/v1";
+	var BASE_URL = Api.api_url;
 
   $scope.getMedications = function(){
     console.log( "Searching treatments" );

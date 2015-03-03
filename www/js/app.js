@@ -1,4 +1,4 @@
-angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users','treatments'])
+angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users','treatments','mediapp.services'])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

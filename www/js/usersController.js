@@ -1,8 +1,8 @@
 angular.module('users',['ngStorage'])
 
-.controller('userController', function($scope,$http,$location,$localStorage){
+.controller('userController', function($scope,$http,$location,$localStorage, Api){
 
-	var BASE_URL = "http://torreta-163528.sae1.nitrousbox.com/api/v1";
+	var BASE_URL = Api.api_url;
 
 	$scope.create = function(user){
  	$scope.user = [];

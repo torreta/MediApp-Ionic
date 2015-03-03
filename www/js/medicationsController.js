@@ -1,8 +1,8 @@
 angular.module('medications',[])
 
-.controller('medicationController', function($scope,$http,$location){
+.controller('medicationController', function($scope,$http,$location, Api){
 
-    var BASE_URL = "http://torreta-163528.sae1.nitrousbox.com/api/v1";
+    var BASE_URL = Api.api_url;
 
   //Consultos la agencias que se encuentran en el API
   $scope.getMedications = function(){
