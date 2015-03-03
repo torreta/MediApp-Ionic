@@ -1,10 +1,10 @@
 angular.module('mediapp.services', [])
 	.factory('Api', function() {
 		return {
-			// http://torreta-163528.sae1.nitrousbox.com/api/v1
+			 api_url : 'http://torreta-163528.sae1.nitrousbox.com/api/v1'
 			// http://192.168.233.131:3000/api/v1
 			// http://localhost:3000/api/v1
-			api_url : 'http://localhost:3000/api/v1'
+			// api_url : 'http://localhost:3000/api/v1'
 		};
 	})
 	.factory('Utils', function() {
