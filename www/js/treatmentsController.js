@@ -10,7 +10,7 @@ angular.module('treatments',['ngStorage'])
     hour: $scope.hours[9],
     frequency: $scope.frequencies[0]
   };
-  $scope.getMedications = function(){
+  $scope.getTreatments = function(){
     console.log( "Searching treatments" );
     $scope.treatments = [];
 
