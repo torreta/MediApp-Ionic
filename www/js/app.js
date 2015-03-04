@@ -1,6 +1,9 @@
-angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users','treatments','mediapp.services'])
 
-  .run(function($ionicPlatform) {
+var db = null;
+
+angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessions','users','treatments','mediapp.services'])
+
+  .run(function($ionicPlatform, $cordovaSQLite) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -13,7 +16,17 @@ angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users',
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault(); 
       }
+      
+      //  db = $cordovaSQLite.openDB("my.db"); //phone
+      db = window.openDatabase("my.db", "1.0", "my.db", 10000);//serve
+
+       $cordovaSQLite.execute(db,
+        "CREATE TABLE IF NOT EXISTS people " +
+            "(id integer primary key, firstname text, " +
+            "lastname text)");
     });
+
+
   })
 
   .config(function($stateProvider, $urlRouterProvider) {
