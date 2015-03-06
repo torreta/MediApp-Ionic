@@ -32,6 +32,11 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
+      .state('home', {
+        url: "/",
+        templateUrl: "templates/treatment/index.html",
+        controller: 'treatmentController'
+      })
       .state('login', {
         url: "/login",
         templateUrl: "templates/session/login.html",
@@ -48,19 +53,11 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
         url: "/recover",
         templateUrl: "templates/session/recover.html"
       })
-
       .state('userEdit', {
         url: "/profile",
         templateUrl: "templates/user/edit.html",
         controller: 'userController'
       })
-
-      .state('home', {
-        url: "/",
-        templateUrl: "templates/treatment/index.html",
-        controller: 'treatmentController'
-      })
-
       .state('newTreatment', {
         url: "/treatment/new",
         templateUrl: "templates/treatment/new.html",
@@ -72,7 +69,6 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
         templateUrl: "templates/medication/new.html",
         controller: 'medicationController'
       })
-
       .state('medications', {
         url: "/medications",
         templateUrl: "templates/medication/index.html",

@@ -1,0 +1,32 @@
+<ion-view view-title="Profile">
+  <ion-content class="padding">
+	<br/>
+	<form novalidate class="simple-form text-center">
+		
+		<input type="email" ng-model="user.email" placeholder= "Emaill Address"/>
+
+		<input type="text" ng-model="user.name" placeholder= "Your Name"/>
+
+		<input type="password" ng-model="user.password"  placeholder= "Password"/>
+
+		<input type="password" ng-model="user.password_confirmation"  placeholder= "Password Confirmation"/>
+
+		<input type="submit" ng-click="update(user)" value="Update" class="btn btn-green"/>
+	</form>
+  	
+  </ion-content>
+</ion-view>
+
+
+<ion-tabs class="tabs-positive tabs-icon-only">
+
+	<ion-tab title="Home" icon-on="ion-ios7-home" icon-off="ion-ios7-home-outline" href="#/">
+	</ion-tab>
+
+	<ion-tab title="Add" icon-on="ion-plus-circled" icon-off="ion-plus-round " href="#/treatment/new">
+	</ion-tab>
+
+	<ion-tab title="Profile" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline" href="#/profile">
+	</ion-tab>
+
+</ion-tabs>
