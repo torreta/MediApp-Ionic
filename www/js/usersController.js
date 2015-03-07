@@ -40,7 +40,7 @@ angular.module('users',['ngStorage'])
  		console.log("Updating Try");
  		console.log("token: " + $localStorage.token );
 	    $http({
-	      method: 'PUT',
+	      method: 'PATCH',
 	      url: BASE_URL + '/users/1',
 	      headers:{
        	 'token': $localStorage.token
