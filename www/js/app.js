@@ -15,7 +15,6 @@ angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users',
       }
     });
   })
-
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 

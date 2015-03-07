@@ -12,6 +12,10 @@ angular.module('treatments',['ngStorage'])
     frequency: $scope.frequencies[0]
   };
 
+  // List options
+  $scope.shouldShowDelete = true;
+  $scope.listCanSwipe = true;
+
   // Get Treatments
   $http({
     method: 'GET',
@@ -50,4 +54,3 @@ angular.module('treatments',['ngStorage'])
     });
   };
 });
->>>>>>> origin/frank

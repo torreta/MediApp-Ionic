@@ -1,8 +1,8 @@
 <ion-view view-title="Home">
 	<ion-content>
 	<a ng-init="getTreatments()"></a>
-		<ion-list can-swipe="listCanSwipe">
-			<ion-item ng-repeat="treatment in treatments">
+		<ion-list>
+			<ion-item ng-repeat="treatment in treatments" can-swipe="true">
 
 				<h2>{{treatment.medication}}</h2>
 				<p>{{treatment.updated_at}}</p>
@@ -10,7 +10,7 @@
 			    <ion-option-button class="button-possitive" ng-click="edit(treatment)">Edit
 			    </ion-option-button>
 				
-				<ion-option-button class="button-assertive" ng-click="delete(treatment)">Delete
+				<ion-option-button class="button-possitive" ng-click="delete(treatment)">Delete
 				</ion-option-button>
 
 			</ion-item>
