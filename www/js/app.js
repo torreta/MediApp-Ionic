@@ -16,14 +16,38 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault(); 
       }
-      
-      //  db = $cordovaSQLite.openDB("my.db"); //phone
-      db = window.openDatabase("my.db", "1.0", "my.db", 10000);//serve
+
+      if (window.cordova) {
+        db = $cordovaSQLite.openDB({ name: "my.db" }); //device
+        console.log("opening bd devise");
+      }else{
+        db = window.openDatabase("my.db", '1.0', 'my', 1024 * 1024 * 100); // browser
+         //db =  window.sqlitePlugin.openDatabase({name: "my.db", location: 1});
+        console.log("opening bd windows");
+      }
+      //session
+       $cordovaSQLite.execute(db,
+        "CREATE TABLE IF NOT EXISTS session " +
+            "(id integer primary key, token text");
+            console.log("table session");
+
 
        $cordovaSQLite.execute(db,
         "CREATE TABLE IF NOT EXISTS people " +
             "(id integer primary key, firstname text, " +
             "lastname text)");
+       //medications
+       // $cordovaSQLite.execute(db,
+       //  "CREATE TABLE IF NOT EXISTS medication " +
+       //      "(id integer primary key, name text, " +
+       //      "description text)");
+       //treatments
+       // $cordovaSQLite.execute(db,
+       //  "CREATE TABLE IF NOT EXISTS people " +
+       //      "(id integer primary key, medication_name text, " +
+       //      "finish date, hour time, frequency integer)");
+       //sessions
+
     });
 
 

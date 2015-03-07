@@ -1,6 +1,6 @@
 angular.module('sessions',['ngStorage'])
 
-.controller('sessionController', function($scope,$http,$location,$localStorage, Api){
+.controller('sessionController', function($scope,$http,$location,$localStorage, Api, $cordovaSQLite){
 
   var BASE_URL = Api.api_url;
 
@@ -24,6 +24,16 @@ angular.module('sessions',['ngStorage'])
       console.log( "inside scope, email: "+$scope.user.email+ ", token: "+ $scope.user.token  );
       $localStorage.token = data.token;
       console.log( "token en localStorage es: " + $localStorage.token );
+
+      var query = "INSERT INTO sessions (token) VALUES (?)";
+      $cordovaSQLite.execute(db,query,[data.token]).then(function(result){
+        console.log("INSERT ID: " +result.insertId);
+      },
+         function(error){
+          console.log(error);  
+        });
+
+
       $location.path('/'); 
       //deberiamos enviar el mensaje de CREADO!
     })
