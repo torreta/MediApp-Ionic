@@ -1,9 +1,12 @@
 angular.module('users',['ngStorage'])
 
-.controller('userController', function($scope,$http,$location,$localStorage, Api, AuthService){
+.controller('userController', function($scope,$http,$location,$localStorage, Api){
 
 	var BASE_URL = Api.api_url;
-
+	$scope.user = {
+		name: $localStorage.name,
+		email: $localStorage.email,
+	};
 	$scope.create = function(user){
 		$scope.user = [];
 
@@ -28,10 +31,10 @@ angular.module('users',['ngStorage'])
 
 	$scope.update = function(user){
 		$http({
-			method: 'PUT',
-			url: BASE_URL + '/users/1',
+			method: 'POST',
+			url: BASE_URL + '/users/update_profile',
 			headers:{
-				'token': AuthService.token
+				'token': $localStorage.token
 			},
 			params:{
 				'name': user.name,
@@ -42,7 +45,7 @@ angular.module('users',['ngStorage'])
 		})
 		.success(function(data,status,headers,config){
 			$scope.user = data;
-			$location.path('/');
+			$location.path('/profile');
 		})
 		.error(function(data,status,headers,config){
 			$location.path('/profile');

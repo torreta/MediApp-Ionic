@@ -20,6 +20,8 @@ angular.module('sessions',['ngStorage'])
 
       $localStorage.token = data.token;
       $localStorage.id = data.user.id;
+      $localStorage.email = data.user.email;
+      $localStorage.name = data.user.name;
       $location.path('/');
     })
     .error(function(data,status,headers,config){
