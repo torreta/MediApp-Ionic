@@ -1,6 +1,6 @@
-angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users','treatments','mediapp.services'])
+angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessions','users','treatments','mediapp.services'])
 
-  .run(function($ionicPlatform) {
+  .run(function($ionicPlatform, $cordovaSQLite) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -13,6 +13,14 @@ angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users',
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
+
+      var db = null;
+      if (window.cordova) {
+        db = $cordovaSQLite.openDB({ name: "my.db" });
+      }else{
+        db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100);
+      }
+
     });
   })
   .config(function($stateProvider, $urlRouterProvider) {
