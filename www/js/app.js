@@ -11,7 +11,7 @@ angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users',
 
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
-        StatusBar.styleDefault(); 
+        StatusBar.styleDefault();
       }
     });
   })
@@ -67,6 +67,6 @@ angular.module('mediapp', ['ionic','ngStorage','medications','sessions','users',
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/login');
 
   });
