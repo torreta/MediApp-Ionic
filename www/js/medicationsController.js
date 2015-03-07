@@ -1,6 +1,6 @@
 angular.module('medications',[])
 
-.controller('medicationController', function($scope,$http,$location, Api){
+.controller('medicationController', function($scope,$http,$location, Api, $cordovaSQLite){
 
     var BASE_URL = Api.api_url;
 

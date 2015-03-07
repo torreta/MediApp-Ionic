@@ -17,6 +17,7 @@
   "cordovaPlugins": [
     "https://github.com/phonegap-build/PushPlugin.git",
     "de.appplant.cordova.plugin.local-notification",
-    "https://github.com/brodysoft/Cordova-SQLitePlugin.git"
+    "https://github.com/brodysoft/Cordova-SQLitePlugin.git",
+    "https://github.com/brodysoft/Cordova-SQLitePlugin"
   ]
 }
