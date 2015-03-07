@@ -40,8 +40,8 @@ angular.module('users',['ngStorage'])
  		console.log("Updating Try");
  		console.log("token: " + $localStorage.token );
 	    $http({
-	      method: 'PATCH',
-	      url: BASE_URL + '/users/1',
+	      method: 'POST',
+	      url: BASE_URL + '/users/update_profile',
 	      headers:{
        	 'token': $localStorage.token
       	  },
@@ -69,7 +69,32 @@ angular.module('users',['ngStorage'])
 
   }; //update user
 
+  	$scope.recover = function(user){
+ 	// $scope.user = [];
+ 		console.log("Recover mail");
+ 		console.log("token: " + $localStorage.token );
+	    $http({
+	      method: 'GET',
+	      url: BASE_URL + '/users/recover_password',
+	      params:{
+	        'email': user.email
+	      }	    
+	    })
+	    .success(function(data,status,headers,config){
+	      console.log( "User mail sent" );
+	      console.log( data );	     
+	      //console.log( "inside scope, email: "+$scope.user.email+ ", token: "+ $scope.user.token  );
+	      $location.path('/login'); 
+	      //deberiamos enviar el mensaje de CREADO!
+	    })
+	    .error(function(data,status,headers,config){
+	      console.log( "error sending user mail" );
+	      $location.path('/login'); 
+	      // If user doesnt have a token, create one and signin
+	      //$scope.loginPOST();
+	    });//http
 
+  }; //update user
 
 
 
