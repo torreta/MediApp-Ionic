@@ -1,0 +1,18 @@
+<ion-view view-title="Recover Account">
+  <ion-content class="padding">
+	<br/>
+  	<h1 class="text-center text-green">Medi<strong class="text-black">App</strong><span class="icon-medical10"></span></h1>
+
+  	<form novalidate class="simple-form text-center">
+		
+		<input type="email" ng-model="user.email" placeholder= "Emaill Address"/>
+
+		<input type="submit" ng-click="recover(user)" value="Recover" class="btn-green"/>
+		<br/>
+		<br/>
+		<a class="btn text-green btn-block" ui-sref="login">Sign In</a>
+		<a class="btn text-green btn-block" ui-sref="signup">Sign Up</a>
+	</form>
+
+  </ion-content>
+</ion-view>

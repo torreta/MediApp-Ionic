@@ -1,9 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('mediapp', ['ionic'])
+angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessions','users','treatments','mediapp.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,3 +12,56 @@ angular.module('mediapp', ['ionic'])
     }
   });
 })
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+
+    .state('login', {
+      url: "/login",
+      templateUrl: "templates/session/login.html",
+      controller: 'sessionController'
+    })
+
+    .state('signup', {
+      url: "/signup",
+      templateUrl: "templates/user/new.html",
+      controller: 'userController'
+    })
+
+    .state('recover', {
+      url: "/recover",
+      templateUrl: "templates/session/recover.html"
+    })
+
+    .state('userEdit', {
+      url: "/profile",
+      templateUrl: "templates/user/edit.html",
+      controller: 'userController'
+    })
+
+    .state('home', {
+      url: "/",
+      templateUrl: "templates/treatment/index.html",
+      controller: 'treatmentController'
+    })
+
+    .state('newTreatment', {
+      url: "/treatment/new",
+      templateUrl: "templates/treatment/new.html",
+      controller: 'treatmentController'
+    })
+
+    .state('newMedication', {
+      url: "/medications/new",
+      templateUrl: "templates/medication/new.html",
+      controller: 'medicationController'
+    })
+
+    .state('medications', {
+      url: "/medications",
+      templateUrl: "templates/medication/index.html",
+      controller: 'medicationController'
+    });
+
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/login');
+});
