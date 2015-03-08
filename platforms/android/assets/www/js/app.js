@@ -1,6 +1,3 @@
-
-var db = null;
-
 angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessions','users','treatments','mediapp.services'])
 
   .run(function($ionicPlatform, $cordovaSQLite) {
@@ -14,21 +11,18 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
 
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
-        StatusBar.styleDefault(); 
+        StatusBar.styleDefault();
       }
-      
-      //  db = $cordovaSQLite.openDB("my.db"); //phone
-      db = window.openDatabase("my.db", "1.0", "my.db", 10000);//serve
 
-       $cordovaSQLite.execute(db,
-        "CREATE TABLE IF NOT EXISTS people " +
-            "(id integer primary key, firstname text, " +
-            "lastname text)");
+      var db = null;
+      if (window.cordova) {
+        db = $cordovaSQLite.openDB({ name: "my.db" });
+      }else{
+        db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100);
+      }
+
     });
-
-
   })
-
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
@@ -81,5 +75,4 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
-
-  });
+});
