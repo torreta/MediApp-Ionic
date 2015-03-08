@@ -1,6 +1,6 @@
 angular.module('treatments',['ngStorage'])
 
-.controller('treatmentController', function($scope,$http,$location,$localStorage, Api, Utils){
+.controller('treatmentController', function($scope,$http,$location,$localStorage, Api, Utils, $ionicPopup){
 
   var BASE_URL = Api.api_url;
 
@@ -28,10 +28,18 @@ angular.module('treatments',['ngStorage'])
     $scope.treatments = data;
   })
   .error(function(data,status,headers,config){
+    var alertPopup = $ionicPopup.alert({
+      title: 'Error',
+      template: 'We couldn\' get your treatments. Please, try again.'
+    });
+    confirmPopup.then(function(res) {
+      if (res) {
+        $location.path('/home');
+      }
+    });
   });
 
   $scope.create = function(treatment){
-    $scope.treatments = [];
 
     $http({
       method: 'POST',
@@ -47,10 +55,23 @@ angular.module('treatments',['ngStorage'])
       }
     })
     .success(function(data,status,headers,config){
-      $scope.treatments = data;
-      $location.path('/');
+      var alertPopup = $ionicPopup.alert({
+        title: 'New treatment added!',
+      });
+      alertPopup.then(function(res) {
+        $location.path('/home');
+      });
     })
     .error(function(data,status,headers,config){
+
+      var alertPopup = $ionicPopup.alert({
+        title: 'Something went wrong',
+        buttons:[{
+          text: 'Try again',
+          type: 'button-positive'
+        }]
+      });
+
     });
   };
 });

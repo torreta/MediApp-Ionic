@@ -14,7 +14,6 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
     $rootScope.$on("$stateChangeStart",function (event, toState, toParams, fromState, fromParams) {
       // Restrict all private URLs for not authorized users
       if(!$localStorage.token){
-        event.preventDefault();
         $location.path('/login');
       }
     });
