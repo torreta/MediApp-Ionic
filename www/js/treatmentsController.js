@@ -1,6 +1,6 @@
 angular.module('treatments',['ngStorage'])
 
-.controller('treatmentController', function($scope,$http,$location,$localStorage, Api, Utils, $ionicPopup){
+.controller('treatmentController', function($scope,$http,$location,$localStorage, Api, Utils, $ionicPopup, $timeout){
 
   var BASE_URL = Api.api_url;
 
@@ -74,4 +74,5 @@ angular.module('treatments',['ngStorage'])
 
     });
   };
+  
 });
