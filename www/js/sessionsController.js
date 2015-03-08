@@ -1,6 +1,6 @@
 angular.module('sessions',['ngStorage'])
 
-.controller('sessionController', function($scope,$http,$location,$localStorage, Api){
+.controller('sessionController', function($scope,$http,$location,$localStorage, Api,$ionicPopup){
 
   var BASE_URL = Api.api_url;
 
@@ -25,13 +25,27 @@ angular.module('sessions',['ngStorage'])
       $location.path('/');
     })
     .error(function(data,status,headers,config){
-
+      var alertPopup = $ionicPopup.alert({
+        title: 'Wrong Email or Password',
+        buttons:[{
+          text: 'Try again',
+          type: 'button-positive'
+        }]
+      });
     });
   };
 
   $scope.logout = function(){
-    delete $localStorage.token;
-    $location.path('/login');
+    var alertPopup = $ionicPopup.alert({
+      title: 'Really? =('
+    });
+    alertPopup.then(function(res) {
+      delete $localStorage.token;
+      delete $localStorage.id;
+      delete $localStorage.email;
+      delete $localStorage.name;
+      $location.path('/login');
+    });
   };
 
 });

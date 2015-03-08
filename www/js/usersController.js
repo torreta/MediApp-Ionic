@@ -1,6 +1,6 @@
 angular.module('users',['ngStorage'])
 
-.controller('userController', function($scope,$http,$location,$localStorage, Api){
+.controller('userController', function($scope,$http,$location,$localStorage, Api,$ionicPopup){
 
 	var BASE_URL = Api.api_url;
 	$scope.user = {
@@ -21,11 +21,18 @@ angular.module('users',['ngStorage'])
 			}
 		})
 		.success(function(data,status,headers,config){
-			$scope.user.token = data.token;
-			$location.path('/login');
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Successful sign up!'
+		    });
+		    alertPopup.then(function(res) {
+		    	$scope.user.token = data.token;
+		    	$location.path('/login');
+		    });
 		})
 		.error(function(data,status,headers,config){
-			$location.path('/signup');
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Something went wrong. Try again!'
+		    });
 		});
 	};
 
@@ -46,9 +53,14 @@ angular.module('users',['ngStorage'])
 		.success(function(data,status,headers,config){
 			$scope.user = data;
 			$location.path('/profile');
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Successful update!'
+		    });
 		})
 		.error(function(data,status,headers,config){
-			$location.path('/profile');
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Something went wrong. Try again!'
+		    });
 		});
 	};
 	

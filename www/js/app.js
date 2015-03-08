@@ -1,6 +1,6 @@
 angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessions','users','treatments','mediapp.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$rootScope,$localStorage,$location) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -10,6 +10,19 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    $rootScope.$on("$stateChangeStart",function (event, toState, toParams, fromState, fromParams) {
+      // Restrict all private URLs for not authorized users
+      if(!$localStorage.token){
+        $location.path('/login');
+      }
+      // Restrict all public URLs for authorized users
+      if($localStorage.token && (toState.name === 'login' || toState.name === 'signup' || toState.name === 'recover')){
+        $location.path('/');
+      }
+    });
+
+
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {
