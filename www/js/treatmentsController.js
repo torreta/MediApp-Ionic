@@ -34,7 +34,7 @@ angular.module('treatments',['ngStorage'])
     });
     confirmPopup.then(function(res) {
       if (res) {
-        $location.path('/home');
+        $location.path('/');
       }
     });
   });
@@ -48,7 +48,7 @@ angular.module('treatments',['ngStorage'])
         'token': $localStorage.token
       },
       params:{
-        'medication_name': treatment.medication,
+        'medication_name': treatment.medication_name,
         'finish': treatment.finish,
         'hour': treatment.hour.id,
         'frequency': treatment.frequency.id
@@ -59,7 +59,7 @@ angular.module('treatments',['ngStorage'])
         title: 'New treatment added!',
       });
       alertPopup.then(function(res) {
-        $location.path('/home');
+        $location.path('/');
       });
     })
     .error(function(data,status,headers,config){
