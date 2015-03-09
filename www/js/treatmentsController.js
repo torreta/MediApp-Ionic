@@ -1,7 +1,7 @@
 angular.module('treatments',['ngStorage'])
 
 .controller('treatmentController', function($scope,$http,$location,$localStorage, Api, Utils, $ionicPopup, $cordovaSQLite,$cordovaLocalNotification){
-
+controller: 'userController'
   var BASE_URL = Api.api_url;
 
   // Values for add treatment form
@@ -77,7 +77,6 @@ angular.module('treatments',['ngStorage'])
       }
     })
     .success(function(data,status,headers,config){
-      $scope.createNotification(hour);
       var alertPopup = $ionicPopup.alert({
         title: 'New treatment added!',
       });
@@ -122,7 +121,7 @@ angular.module('treatments',['ngStorage'])
 
   // Insert in local database if no internet
   $scope.insert = function(finish,hour,frequency,name) {
-    //$scope.createNotification(hour);
+    $scope.createNotification(hour);
     aux = new Date(finish);
     aux2 = aux.getFullYear()+"-"+(aux.getMonth()+1)+"-"+aux.getDate();
    
@@ -221,7 +220,7 @@ angular.module('treatments',['ngStorage'])
           date: tiempo,
           message: "Pill time at: "+hour+".",
       }).then(function () {
-          var alertPopup = $ionicPopup.alert({
+        var alertPopup = $ionicPopup.alert({
           title: 'Alarm Created treatment'
         });
       });
