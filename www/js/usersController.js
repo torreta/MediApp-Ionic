@@ -63,5 +63,30 @@ angular.module('users',['ngStorage'])
 		    });
 		});
 	};
+
+	$scope.recover = function(user){
+		$http({
+		method: 'GET',
+		url: BASE_URL + '/users/recover_password',
+		params:{
+		'email': user.email
+		}
+		})
+		.success(function(data,status,headers,config){
+		//console.log( "inside scope, email: "+$scope.user.email+ ", token: "+ $scope.user.token );
+		$location.path('/login');
+		//deberiamos enviar el mensaje de CREADO!
+			var alertPopup = $ionicPopup.alert({
+			    	title: 'Successfully mailed!'
+			  });
+		})
+		.error(function(data,status,headers,config){
+		$location.path('/login');
+		var alertPopup = $ionicPopup.alert({
+		    	title: 'Something went wrong. Try again!'
+		});
+		
+		});
+	}; 
 	
 });
