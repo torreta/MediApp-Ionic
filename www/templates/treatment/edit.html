@@ -1,0 +1,20 @@
+<ion-view view-title="Add">
+  <ion-content class="padding">
+	<br/>
+	<form novalidate class="simple-form text-center">
+		
+		<input type="text" ng-model="treatmentEdit.medication_name" placeholder= "Medication Name"/>
+		
+		<label>Treatment Hour</label>
+		<select ng-model="treatmentEdit.hour" ng-options="hour.name for hour in hours track by hour.id"></select>
+		
+		<label>Treatment Frequency (Hrs.)</label>
+		<select ng-model="treatmentEdit.frequency" ng-options="frequency.id for frequency in frequencies"></select>
+
+
+		<input type="date" ng-model="treatment.finish" placeholder="Finish date">
+
+		<input type="submit" ng-click="update(treatment)" value="Add Treatment" class="btn btn-green"/>
+	</form>
+  </ion-content>
+</ion-view>

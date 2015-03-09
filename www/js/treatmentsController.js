@@ -16,6 +16,7 @@ angular.module('treatments',['ngStorage'])
   $scope.shouldShowDelete = true;
   $scope.listCanSwipe = true;
 
+  $scope.treatments = [];
   // Get Treatments
   $http({
     method: 'GET',
@@ -28,7 +29,7 @@ angular.module('treatments',['ngStorage'])
     $scope.treatments = data;
   })
   .error(function(data,status,headers,config){
-    var alertPopup = $ionicPopup.alert({
+    var confirmPopup = $ionicPopup.alert({
       title: 'Error',
       template: 'We couldn\' get your treatments. Please, try again.'
     });
@@ -59,7 +60,36 @@ angular.module('treatments',['ngStorage'])
         title: 'New treatment added!',
       });
       alertPopup.then(function(res) {
-        $location.path('/');
+        $scope.treatments.splice(0, 0, data);
+      });
+    })
+    .error(function(data,status,headers,config){
+
+      var alertPopup = $ionicPopup.alert({
+        title: 'Something went wrong',
+        buttons:[{
+          text: 'Try again',
+          type: 'button-positive'
+        }]
+      });
+
+    });
+  };
+
+  $scope.delete = function(treatment){
+    $http({
+      method: 'DELETE',
+      url: BASE_URL + '/treatments/' + treatment.id,
+      headers:{
+        'token': $localStorage.token
+      }
+    })
+    .success(function(data,status,headers,config){
+      var alertPopup = $ionicPopup.alert({
+        title: 'Treatment Deleted',
+      });
+      alertPopup.then(function(res) {
+        $scope.treatments.splice($scope.treatments.indexOf(treatment), 1);
       });
     })
     .error(function(data,status,headers,config){

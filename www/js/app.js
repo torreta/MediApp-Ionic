@@ -17,7 +17,7 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
         $location.path('/login');
       }
       // Restrict all public URLs for authorized users
-      if($localStorage.token && (toState.name === 'login' || toState.name === 'signup' || toState.name === 'recover') && (fromState.name != 'profile' && toState.name != 'login')){
+      if($localStorage.token && (toState.name === 'login' || toState.name === 'signup' || toState.name === 'recover')){
         $location.path('/');
       }
     });
@@ -60,6 +60,12 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
     .state('newTreatment', {
       url: "/treatment/new",
       templateUrl: "templates/treatment/new.html",
+      controller: 'treatmentController'
+    })
+
+    .state('editTreatment', {
+      url: "/treatment/edit",
+      templateUrl: "templates/treatment/edit.html",
       controller: 'treatmentController'
     })
 
