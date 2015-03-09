@@ -1,101 +1,67 @@
 angular.module('users',['ngStorage'])
 
-.controller('userController', function($scope,$http,$location,$localStorage, Api, $cordovaSQLite){
+.controller('userController', function($scope,$http,$location,$localStorage, Api,$ionicPopup){
 
 	var BASE_URL = Api.api_url;
-
+	$scope.user = {
+		name: $localStorage.name,
+		email: $localStorage.email,
+	};
 	$scope.create = function(user){
- 	$scope.user = [];
+		$scope.user = [];
 
-	    $http({
-	      method: 'POST',
-	      url: BASE_URL + '/users',
-	      params:{
-	      	'name': user.name,
-	        'email': user.email,
-	        'password': user.password,
-	        'password_confirmation': user.password_confirmation
-	      }
-	    })
-	    .success(function(data,status,headers,config){
-	      console.log( "User created" );
-	      console.log( data );
-	      $scope.user.token = data.token
-	      console.log( "inside scope, email: "+$scope.user.email+ ", token: "+ $scope.user.token  );
-	      $location.path('/login'); 
+		$http({
+			method: 'POST',
+			url: BASE_URL + '/users',
+			params:{
+			'name': user.name,
+			'email': user.email,
+			'password': user.password,
+			'password_confirmation': user.password_confirmation
+			}
+		})
+		.success(function(data,status,headers,config){
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Successful sign up!'
+		    });
+		    alertPopup.then(function(res) {
+		    	$scope.user.token = data.token;
+		    	$location.path('/login');
+		    });
+		})
+		.error(function(data,status,headers,config){
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Something went wrong. Try again!'
+		    });
+		});
+	};
 
-	      //deberiamos enviar el mensaje de CREADO!
-	    })
-	    .error(function(data,status,headers,config){
-	      console.log( "error creating user" );
-	      $location.path('/signup'); 
-	      // If user doesnt have a token, create one and signin
-	      //$scope.loginPOST();
-	    });//http
-
-  }; //create user
-
-  	$scope.update = function(user){
- 	// $scope.user = [];
- 		console.log("Updating Try");
- 		console.log("token: " + $localStorage.token );
-	    $http({
-	      method: 'POST',
-	      url: BASE_URL + '/users/update_profile',
-	      headers:{
-       	 'token': $localStorage.token
-      	  },
-	      params:{
-	      	'name': user.name,
-	        'email': user.email,
-	        'password': user.password,
-	        'password_confirmation': user.password_confirmation
-	      }	    
-	    })
-	    .success(function(data,status,headers,config){
-	      console.log( "User updated" );
-	      console.log( data );
-	      $scope.user = data
-	      //console.log( "inside scope, email: "+$scope.user.email+ ", token: "+ $scope.user.token  );
-	      $location.path('/'); 
-	      //deberiamos enviar el mensaje de CREADO!
-	    })
-	    .error(function(data,status,headers,config){
-	      console.log( "error updating user" );
-	      $location.path('/profile'); 
-	      // If user doesnt have a token, create one and signin
-	      //$scope.loginPOST();
-	    });//http
-
-  }; //update user
-
-  	$scope.recover = function(user){
- 	// $scope.user = [];
- 		console.log("Recover mail");
- 		console.log("token: " + $localStorage.token );
-	    $http({
-	      method: 'GET',
-	      url: BASE_URL + '/users/recover_password',
-	      params:{
-	        'email': user.email
-	      }	    
-	    })
-	    .success(function(data,status,headers,config){
-	      console.log( "User mail sent" );
-	      console.log( data );	     
-	      //console.log( "inside scope, email: "+$scope.user.email+ ", token: "+ $scope.user.token  );
-	      $location.path('/login'); 
-	      //deberiamos enviar el mensaje de CREADO!
-	    })
-	    .error(function(data,status,headers,config){
-	      console.log( "error sending user mail" );
-	      $location.path('/login'); 
-	      // If user doesnt have a token, create one and signin
-	      //$scope.loginPOST();
-	    });//http
-
-  }; //update user
-
-
-
-});//controller
+	$scope.update = function(user){
+		$http({
+			method: 'POST',
+			url: BASE_URL + '/users/update_profile',
+			headers:{
+				'token': $localStorage.token
+			},
+			params:{
+				'name': user.name,
+				'email': user.email,
+				'password': user.password,
+				'password_confirmation': user.password_confirmation
+			}
+		})
+		.success(function(data,status,headers,config){
+			$scope.user = data;
+			$location.path('/profile');
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Successful update!'
+		    });
+		})
+		.error(function(data,status,headers,config){
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Something went wrong. Try again!'
+		    });
+		});
+	};
+	
+});

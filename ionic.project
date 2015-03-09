@@ -1,12 +1,4 @@
 {
-  "name": "testo",
-  "app_id": "",
-  "gulpStartupTasks": [
-    "sass",
-    "watch"
-  ],
-  "watchPatterns": [
-    "www/**/*",
-    "!www/lib/**/*"
-  ]
+  "name": "mediaapp",
+  "app_id": ""
 }
