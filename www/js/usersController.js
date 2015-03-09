@@ -64,4 +64,28 @@ angular.module('users',['ngStorage'])
 		});
 	};
 	
+
+	$scope.recover = function(user){
+		$http({
+			method: 'GET',
+			url: BASE_URL + '/users/recover_password',
+			params:{				
+				'email': user.email				
+			}
+		})
+		.success(function(data,status,headers,config){
+			$scope.user = data;
+			$location.path('/login');
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Recovery mail delivered!'
+		    });
+		})
+		.error(function(data,status,headers,config){
+			var alertPopup = $ionicPopup.alert({
+		    	title: 'Invalid mail, Try again!'
+		    });
+		});
+	};
+
+
 });
