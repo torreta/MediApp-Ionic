@@ -51,16 +51,32 @@ angular.module('users',['ngStorage'])
 			}
 		})
 		.success(function(data,status,headers,config){
-			$scope.user = data;
-			$location.path('/profile');
 			var alertPopup = $ionicPopup.alert({
 		    	title: 'Successful update!'
+		    });
+		    alertPopup.then(function(res) {
+		    	$localStorage.email= data.email;
+	     		$localStorage.name = data.name;
+				$location.path('/profile');
 		    });
 		})
 		.error(function(data,status,headers,config){
 			var alertPopup = $ionicPopup.alert({
 		    	title: 'Something went wrong. Try again!'
 		    });
+		});
+	};
+
+	$scope.logout = function(){
+		var alertPopup = $ionicPopup.alert({
+			title: 'Really? =('
+		});
+		alertPopup.then(function(res) {
+			delete $localStorage.token;
+			delete $localStorage.id;
+			delete $localStorage.email;
+			delete $localStorage.name;
+			$location.path('/login');
 		});
 	};
 	

@@ -35,17 +35,6 @@ angular.module('sessions',['ngStorage'])
     });
   };
 
-  $scope.logout = function(){
-    var alertPopup = $ionicPopup.alert({
-      title: 'Really? =('
-    });
-    alertPopup.then(function(res) {
-      delete $localStorage.token;
-      delete $localStorage.id;
-      delete $localStorage.email;
-      delete $localStorage.name;
-      $location.path('/login');
-    });
-  };
+
 
 });
