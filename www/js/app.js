@@ -1,6 +1,7 @@
+var db = null;
 angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessions','users','treatments','mediapp.services'])
 
-.run(function($ionicPlatform,$rootScope,$localStorage,$location) {
+.run(function($ionicPlatform,$rootScope,$localStorage,$location, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -11,6 +12,16 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
       StatusBar.styleDefault();
     }
 
+    // Database
+    if (window.cordova) {
+      db = $cordovaSQLite.openDB("local.db");
+    }else{
+      db = window.openDatabase("local.db", "1.0", "local.db", 10000);
+    }
+
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS treatments (id integer primary key, start text, finish text, hour text, frequency integer, medication text, deleted integer)");
+
+    // Filters
     $rootScope.$on("$stateChangeStart",function (event, toState, toParams, fromState, fromParams) {
       // Restrict all private URLs for not authorized users
       if(!$localStorage.token){

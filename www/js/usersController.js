@@ -1,6 +1,6 @@
 angular.module('users',['ngStorage'])
 
-.controller('userController', function($scope,$http,$location,$localStorage, Api,$ionicPopup){
+.controller('userController', function($scope,$http,$location,$localStorage, Api,$ionicPopup,$cordovaSQLite){
 
 	var BASE_URL = Api.api_url;
 	$scope.user = {

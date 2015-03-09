@@ -3,13 +3,10 @@
 	<a ng-init="getTreatments()"></a>
 		<ion-list>
 			<ion-item ng-repeat="treatment in treatments" can-swipe="true">
-
 				<h2>{{treatment.medication}}</h2>
 				<p>{{treatment.hour}}</p>
-
 				<ion-option-button class="button-assertive" ng-click="delete(treatment)">Delete
 				</ion-option-button>
-
 			</ion-item>
 		</ion-list>
 	</ion-content>
