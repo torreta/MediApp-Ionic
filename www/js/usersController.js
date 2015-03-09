@@ -1,6 +1,6 @@
 angular.module('users',['ngStorage'])
 
-.controller('userController', function($scope,$http,$location,$localStorage, Api,$ionicPopup,$cordovaSQLite){
+.controller('userController', function($scope,$http,$location,$localStorage, Api,$ionicPopup,$cordovaSQLite,$cordovaLocalNotification){
 
 	var BASE_URL = Api.api_url;
 	$scope.user = {
@@ -101,6 +101,25 @@ angular.module('users',['ngStorage'])
 		    	title: 'Invalid mail, Try again!'
 		    });
 		});
+	};
+
+	$scope.crearNotificacion = function(){
+
+
+	    var tiempo = new Date();
+	    tiempo.setMinutes(tiempo.getMinutes() + 1);
+	    $cordovaLocalNotification.add({
+	        id: 1,
+	        title: "Take your Treatment",
+	        date: tiempo,
+	        message: "Pill time",
+	    }).then(function () {
+
+	        var alertPopup = $ionicPopup.alert({
+		    	title: 'Notification Created'
+		    });
+	    });
+
 	};
 
 
