@@ -53,8 +53,7 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
 
     .state('recover', {
       url: "/recover",
-      templateUrl: "templates/session/recover.html",
-      controller: 'userController'
+      templateUrl: "templates/session/recover.html"
     })
 
     .state('userEdit', {

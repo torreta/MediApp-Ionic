@@ -1,6 +1,6 @@
 angular.module('treatments',['ngStorage'])
 
-.controller('treatmentController', function($scope,$http,$location,$localStorage, Api, Utils, $ionicPopup, $cordovaSQLite){
+.controller('treatmentController', function($scope,$http,$location,$localStorage, Api, Utils, $ionicPopup, $cordovaSQLite,$cordovaLocalNotification){
 
   var BASE_URL = Api.api_url;
 
@@ -26,7 +26,7 @@ angular.module('treatments',['ngStorage'])
     }
   })
   .success(function(data,status,headers,config){
-
+    $scope.treatments = data;
     for (i = 0; i < data.length; i++) {
       $scope.search(data[i].medication, data[i].hour, data[i].frequency, data[i].finish);
     }
@@ -52,6 +52,7 @@ angular.module('treatments',['ngStorage'])
       }
     })
     .success(function(data,status,headers,config){
+      $scope.createNotification(hour);
       var alertPopup = $ionicPopup.alert({
         title: 'New treatment added!',
       });
@@ -96,7 +97,7 @@ angular.module('treatments',['ngStorage'])
 
   // Insert in local database if no internet
   $scope.insert = function(finish,hour,frequency,name) {
-
+    //$scope.createNotification(hour);
     aux = new Date(finish);
     aux2 = aux.getFullYear()+"-"+(aux.getMonth()+1)+"-"+aux.getDate();
    
@@ -110,6 +111,7 @@ angular.module('treatments',['ngStorage'])
         var query = "INSERT INTO treatments (finish,hour,frequency,medication,deleted) VALUES (?,?,?,?,0)";
         $cordovaSQLite.execute(db, query, [aux2,hour,frequency,name]).then(function(res) {
           $scope.select();
+          
         }, function (err) {
           console.log(err);
           var alertPopup = $ionicPopup.alert({
@@ -179,6 +181,25 @@ angular.module('treatments',['ngStorage'])
         }]
       });
     });
+
+  };
+
+
+  $scope.createNotification = function(hour){
+
+
+      var tiempo = new Date();
+      tiempo.setMinutes(tiempo.getMinutes() + 1);
+      $cordovaLocalNotification.add({
+          id: 1,
+          title: "Take your Treatment",
+          date: tiempo,
+          message: "Pill time at: "+hour+".",
+      }).then(function () {
+          var alertPopup = $ionicPopup.alert({
+          title: 'Alarm Created treatment'
+        });
+      });
 
   };
 
