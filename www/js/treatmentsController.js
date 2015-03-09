@@ -36,6 +36,31 @@ angular.module('treatments',['ngStorage'])
     $scope.select();
   });
 
+
+  $scope.getTreatments = function(){
+
+    $scope.treatments = [];
+    // Get Treatments
+    $http({
+      method: 'GET',
+      url: BASE_URL + '/treatments',
+      headers:{
+        'token': $localStorage.token
+      }
+    })
+    .success(function(data,status,headers,config){
+      $scope.treatments = data;
+      for (i = 0; i < data.length; i++) {
+        $scope.search(data[i].medication, data[i].hour, data[i].frequency, data[i].finish);
+      }
+
+    })
+    .error(function(data,status,headers,config){
+      $scope.select();
+    });
+  };
+
+
   $scope.create = function(treatment){
 
     $http({

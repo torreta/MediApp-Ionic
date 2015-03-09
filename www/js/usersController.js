@@ -103,7 +103,7 @@ angular.module('users',['ngStorage'])
 		});
 	};
 
-	$scope.crearNotificacion = function(){
+	$scope.createNotification = function(){
 
 
 	    var tiempo = new Date();
