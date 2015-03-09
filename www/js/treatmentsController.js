@@ -179,6 +179,7 @@ angular.module('treatments',['ngStorage'])
         }]
       });
     });
-  }
-  
+
+  };
+
 });
