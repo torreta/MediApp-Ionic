@@ -36,7 +36,7 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
 
   });
 })
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
   $stateProvider
 
     .state('login', {
@@ -95,4 +95,6 @@ angular.module('mediapp', ['ionic','ngCordova','ngStorage','medications','sessio
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
+  $ionicConfigProvider.tabs.style('ios'); //even if you're on android
+  $ionicConfigProvider.tabs.position('ios'); //even if you're on android
 });

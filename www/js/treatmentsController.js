@@ -121,7 +121,7 @@ controller: 'userController'
 
   // Insert in local database if no internet
   $scope.insert = function(finish,hour,frequency,name) {
-    $scope.createNotification(hour);
+    $scope.createNotification(hour,name);
     aux = new Date(finish);
     aux2 = aux.getFullYear()+"-"+(aux.getMonth()+1)+"-"+aux.getDate();
    
@@ -209,14 +209,14 @@ controller: 'userController'
   };
 
 
-  $scope.createNotification = function(hour){
+  $scope.createNotification = function(hour,name){
 
 
       var tiempo = new Date();
       tiempo.setMinutes(tiempo.getMinutes() + 1);
       $cordovaLocalNotification.add({
           id: 1,
-          title: "Take your Treatment",
+          title: "Take your Treatment: " +name+".",
           date: tiempo,
           message: "Pill time at: "+hour+".",
       }).then(function () {
